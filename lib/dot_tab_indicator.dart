@@ -4,26 +4,29 @@ import 'package:flutter/widgets.dart';
 const kDefaultDotIndicatorRadius = 3.0;
 
 class DotTabIndicator extends Decoration {
-  const DotTabIndicator({this.indicatorColor, this.radius = kDefaultDotIndicatorRadius});
+  DotTabIndicator({
+    required this.indicatorColor,
+    this.radius = kDefaultDotIndicatorRadius,
+  });
 
   final Color indicatorColor;
   final double radius;
 
   @override
-  BoxPainter createBoxPainter([onChanged]) {
+  BoxPainter createBoxPainter([VoidCallback? onChanged]) {
     return _DotPainter(this, onChanged);
   }
 }
 
 class _DotPainter extends BoxPainter {
-  _DotPainter(this.decoration, VoidCallback onChanged) : super(onChanged);
+  _DotPainter(this.decoration, VoidCallback? onChanged) : super(onChanged);
 
-  final DotTabIndicator decoration;
+  late DotTabIndicator decoration;
 
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
-    final center = configuration.size.center(offset);
-    final dy = configuration.size.height;
+    final center = configuration.size!.center(offset);
+    final dy = configuration.size!.height;
 
     final newOffset = Offset(center.dx, dy - 8);
 
